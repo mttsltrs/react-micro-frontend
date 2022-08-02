@@ -1,0 +1,16 @@
+.weather-card-container {
+    margin: 20px auto auto;
+}
+
+.weather-card {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.forecast {
+    display: flex;
+    align-items: center;
+}
