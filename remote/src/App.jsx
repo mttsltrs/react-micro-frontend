@@ -1,18 +1,33 @@
-import React, { useState } from "react"
-import ReactDOM from "react-dom"
-import LocationSelect from "./components/LocationSelect/LocationSelect"
-import WeatherCard from "./components/WeatherCard/WeatherCard"
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  useNavigate
+} from 'react-router-dom'
+import Forecast from './modules/Forecast'
+import Button from '@mui/material/Button'
 
-import "./index.css"
+import './index.css'
 
 const App = () => {
+  const navigate = useNavigate()
   return (
-    <div className="container">
+    <div className='app-container'>
       <div>Name: remote</div>
       <div>Framework: react</div>
-      <div>Description: Remote app exposing components</div>
+      <div>Description: This app exposes the Forecast module via webpack.config.js</div>
+      <Button variant='contained' onClick={() => navigate('/forecast')}>click to view module</Button>
     </div>
   )
 }
 
-ReactDOM.render(<App />, document.getElementById("app"))
+ReactDOM.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App/>}/>
+      <Route path='/forecast' element={<Forecast/>}/>
+    </Routes>
+  </BrowserRouter>
+, document.getElementById('app'))
