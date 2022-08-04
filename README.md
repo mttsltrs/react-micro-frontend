@@ -18,10 +18,10 @@ docker-compose up
 
 ## Structure
 ### API
-A node express server that makes request to the [Open-Meteo weather api](https://open-meteo.com/en/docs) on port 3000
+A node express server that queries the [Open-Meteo weather api](https://open-meteo.com/en/docs) on port 3000
 
 ### Shell
-A react app which consumes remote components on port 3001
+A react app which consumes and renders the remote Forecast module on port 3001
 
 ### Remote
-A react app which exports components using webpack module federation on port 3002
+A react app which exports a weather Forecast module using webpack module federation on port 3002
