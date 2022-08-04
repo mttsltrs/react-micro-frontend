@@ -10,8 +10,7 @@
   },
   "license": "MIT",
   "author": {
-    "name": "Jack Herrington",
-    "email": "jherr@pobox.com"
+    "name": ""
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -30,10 +29,6 @@
     "webpack-dev-server": "^4.3.1"
   },
   "dependencies": {
-    "@babel/runtime": "^7.13.10",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.9.2",
     "axios": "^0.27.2",
     "react": "^17.0.2",
