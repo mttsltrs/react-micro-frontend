@@ -1,21 +1,31 @@
 .forecast-container {
-    max-width: 800px;
-    margin: 20px auto auto;
+	max-width: 800px;
+	margin: 20px auto auto;
 }
 
 .weather-card-container {
-    margin: 20px auto auto;
+	margin: 20px auto auto;
 }
-  
+
 .weather-card {
-    min-height: 50px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin: 15px;
+	min-height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 15px;
 }
-  
+
 .forecast {
-    display: flex;
-    align-items: center;
+	display: flex;
+	align-items: center;
+}
+
+.loading {
+	margin-top: 15px;
+	display: flex;
+	justify-content: center;
+}
+
+.error {
+	margin-top: 15px;
 }
