@@ -1,20 +1,24 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "returns weather and temp by city from the Open-Meteo api",
-  "main": "index.js",
-  "scripts": {
-    "start": "nodemon index.js"
-  },
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "axios": "^0.27.2",
-    "cors": "^2.8.5",
-    "date-fns": "^2.29.1",
-    "express": "^4.18.1"
-  },
-  "devDependencies": {
-    "nodemon": "^2.0.19"
-  }
+	"name": "server",
+	"version": "1.0.0",
+	"description": "returns weather and temp by city from the Open-Meteo api",
+	"main": "index.js",
+	"scripts": {
+		"start": "nodemon index.js",
+		"test": "jest"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"axios": "^0.27.2",
+		"cors": "^2.8.5",
+		"date-fns": "^2.29.1",
+		"express": "^4.18.1"
+	},
+	"devDependencies": {
+		"jest": "^28.1.3",
+		"nock": "^13.2.9",
+		"nodemon": "^2.0.19",
+		"supertest": "^6.2.4"
+	}
 }
