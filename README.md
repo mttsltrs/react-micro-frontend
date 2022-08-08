@@ -1,6 +1,6 @@
 # 🌦️ A basic weather app for some Node & React practice
 
-![unit-tests](https://github.com/mttsltrs/react-micro-frontend/actions/workflows/unit-test.yml/badge.svg)
+![unit-tests](https://github.com/mttsltrs/react-micro-frontend/actions/workflows/unit-tests.yml/badge.svg)
 
 Run using `Node v18.6.0`
 
