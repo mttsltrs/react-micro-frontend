@@ -43,10 +43,7 @@ const forecastResponse = {
 			'2022-09-03',
 			'2022-09-04'
 		],
-		weathercode: [
-			0, 1, 2, 3, 45, 51, 52, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77,
-			80, 81, 82, 85, 86, 95, 96, 99, -1
-		],
+		weathercode: [0, 1, 2, 3, 45, 51, 52, 55, 56, 57, 61, 63, 65, 66, 67, 71, 73, 75, 77, 80, 81, 82, 85, 86, 95, 96, 99, -1],
 		temperature_2m_max: [...Array(28).keys()]
 	}
 }
@@ -174,31 +171,15 @@ describe('GET /weather', () => {
 	})
 
 	it('should return an error when location is not present', async () => {
-		const errorMessage =
-			"request must contain a city: '/weather?location={city}'"
+		const errorMessage = "request must contain a city: '/weather?location={city}'"
 		const response = await request(app).get('/weather')
 		expect(response.body.message).toBe(errorMessage)
 	})
 
-	it('should catch and return an error when geo query fails', async () => {
+	it('should catch and return an error when a fails', async () => {
 		nock('https://geocoding-api.open-meteo.com')
 			.filteringPath(path => '/v1/search')
 			.get('/v1/search')
-			.reply(500)
-
-		const response = await request(app).get('/weather?location=belfast')
-		expect(response.error.text).toBe('Unable to query location')
-	})
-
-	it('should catch and return an error when forecast query fails', async () => {
-		nock('https://geocoding-api.open-meteo.com')
-			.filteringPath(path => '/v1/search')
-			.get('/v1/search')
-			.reply(200, geoResponse)
-
-		nock('https://api.open-meteo.com')
-			.filteringPath(path => '/v1/forecast')
-			.get('/v1/forecast')
 			.reply(500)
 
 		const response = await request(app).get('/weather?location=belfast')

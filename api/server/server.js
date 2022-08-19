@@ -72,51 +72,50 @@ const getDay = date => {
 
 app.use(cors())
 
-app.get('/weather', (req, res) => {
+app.get('/weather', async (req, res) => {
+	console.log(req.method, req.url)
 	const location = req.query.location
 
 	if (location) {
-		axios
-			.get('https://geocoding-api.open-meteo.com/v1/search', {
+		try {
+			const geo = await axios.get('https://geocoding-api.open-meteo.com/v1/search', {
 				params: { name: location }
 			})
-			.then(geo => {
-				const { latitude, longitude } = geo.data.results[0]
-				const startDate = format(new Date(), 'yyyy-MM-dd')
-				const endDate = format(addDays(new Date(), 4), 'yyyy-MM-dd')
 
-				axios
-					.get('https://api.open-meteo.com/v1/forecast', {
-						params: {
-							latitude,
-							longitude,
-							start_date: startDate,
-							end_date: endDate,
-							daily: 'weathercode,temperature_2m_max',
-							timezone: 'UTC'
-						}
-					})
-					.then(response => {
-						const { daily } = response.data
-						const { weathercode: weatherCodes, time: dates, temperature_2m_max: temps } = daily
+			const { latitude, longitude } = geo.data.results[0]
+			const startDate = format(new Date(), 'yyyy-MM-dd')
+			const endDate = format(addDays(new Date(), 4), 'yyyy-MM-dd')
 
-						const forecast = weatherCodes.reduce(
-							(arr, code, i) => [
-								...arr,
-								{
-									day: getDay(dates[i]),
-									temp: temps[i],
-									code,
-									description: getDescription(code)
-								}
-							],
-							[]
-						)
-						res.status(response.status).json(forecast)
-					})
-					.catch(error => res.status(error.response.status).send('Unable to fetch forecast'))
+			const response = await axios.get('https://api.open-meteo.com/v1/forecast', {
+				params: {
+					latitude,
+					longitude,
+					start_date: startDate,
+					end_date: endDate,
+					daily: 'weathercode,temperature_2m_max',
+					timezone: 'UTC'
+				}
 			})
-			.catch(error => res.status(error.response.status).send('Unable to query location'))
+
+			const { daily } = response.data
+			const { weathercode: weatherCodes, time: dates, temperature_2m_max: temps } = daily
+			const forecast = weatherCodes.reduce(
+				(arr, code, i) => [
+					...arr,
+					{
+						day: getDay(dates[i]),
+						temp: temps[i],
+						code,
+						description: getDescription(code)
+					}
+				],
+				[]
+			)
+
+			res.status(response.status).json(forecast)
+		} catch (error) {
+			res.status(error.response.status).send('Unable to fetch forecast')
+		}
 	} else {
 		res.status(400).json({
 			message: "request must contain a city: '/weather?location={city}'"
